@@ -51,12 +51,7 @@ class Home extends Component {
   async addToPin(num) {
     const digit = this.props.home.digit;
     digit.push(num);
-    let word = await sendDigit(digit.join(''), this.props.settings.serverUrl);
-    console.log('word', word)
-    word = JSON.parse(word);
-    if(word && word.data) {
-        this.props.setWord(word.data);
-    }
+    this.sendT9(digit);
     this.props.setDigit(digit);
   }
 
@@ -64,7 +59,20 @@ class Home extends Component {
     const digit = this.props.home.digit;
     if (digit.length > 0) {
       digit.pop();
+      if (digit.length < 1) {
+        this.props.setWord([]);
+      } else {
+        this.sendT9(digit);
+      }
       this.props.setDigit(digit);
+    }
+  }
+
+  async sendT9(digit) {
+    let word = await sendDigit(digit.join(''), this.props.settings.serverUrl);
+    word = JSON.parse(word);
+    if (word && word.data) {
+      this.props.setWord(word.data);
     }
   }
 
@@ -101,16 +109,17 @@ class Home extends Component {
     return (
       <Container style={styles.containerLayout}>
         <Header>
-          <Left></Left>
+          <Left />
 
-          <Body></Body>
+          <Body />
 
           <Right>
-              <Button
-                  onPress={this.props.openDrawer}
-                  uppercase={false}>
-                <Icon active name="menu" />
-              </Button>
+            <Button
+              onPress={this.props.openDrawer}
+              uppercase={false}
+            >
+              <Icon active name="menu" />
+            </Button>
           </Right>
         </Header>
         <Content>
@@ -119,10 +128,10 @@ class Home extends Component {
               Enter digit numbers
             </Text>
             <Text style={styles.pinBar}>
-                {this.props.home.digit}
+              {this.props.home.digit}
             </Text>
             <Text style={styles.pinBar}>
-                {this.props.home.word ? this.props.home.word.join(',') : ''}
+              {this.props.home.word ? this.props.home.word.join(',') : ''}
             </Text>
             <View style={styles.pinButtonContainer}>
               {[0, 1, 2].map(i => this.renderPinButtonsRow(i))}
@@ -135,8 +144,8 @@ class Home extends Component {
                   textStyle={styles.pinButtonText}
                   uppercase={false}
                 >
-                    <Text>0</Text>
-                  </Button>
+                  <Text>0</Text>
+                </Button>
                 <Button
                   style={styles.pinButton}
                   activeOpacity={0.5}
@@ -179,19 +188,19 @@ export default connect(mapStateToProps, bindAction)(Home);
 const styles = StyleSheet.create({
   // Main layout
   containerLayout: {
-      backgroundColor: '#FBFAFA',
+    backgroundColor: '#FBFAFA',
   },
   row: {
-      flex: 1,
-      alignItems: 'center',
+    flex: 1,
+    alignItems: 'center',
   },
   text: {
-      fontSize: 20,
-      marginBottom: 15,
-      alignItems: 'center',
+    fontSize: 20,
+    marginBottom: 15,
+    alignItems: 'center',
   },
   mt: {
-      marginTop: 18,
+    marginTop: 18,
   },
 
   // Buttons layout

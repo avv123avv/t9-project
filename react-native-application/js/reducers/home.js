@@ -18,7 +18,6 @@ export default function (state:State = initialState, action:Action): State {
       digit: action.payload,
     };
   } else if (action.type === SET_WORD) {
-    console.log('word',action.payload);
     return {
       ...state,
       word: action.payload,

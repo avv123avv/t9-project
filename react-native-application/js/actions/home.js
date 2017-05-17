@@ -13,7 +13,6 @@ export function setDigit(digit:string):Action {
 }
 
 export function setWord(word:string):Action {
-    console.log('setword', word);
     return {
         type: SET_WORD,
         payload: word,

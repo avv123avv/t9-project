@@ -133162,25 +133162,33 @@ this.props.setIndex(index);
 this.props.pushRoute({key:route,index:1},this.props.navigation.key);
 }},{key:'addToPin',value:function addToPin(
 
-num){var digit,word;return regeneratorRuntime.async(function addToPin$(_context){while(1){switch(_context.prev=_context.next){case 0:
+num){var digit;return regeneratorRuntime.async(function addToPin$(_context){while(1){switch(_context.prev=_context.next){case 0:
 digit=this.props.home.digit;
-digit.push(num);_context.next=4;return regeneratorRuntime.awrap(
-(0,_home.sendDigit)(digit.join(''),this.props.settings.serverUrl));case 4:word=_context.sent;
-console.log('word',word);
-word=JSON.parse(word);
-if(word&&word.data){
-this.props.setWord(word.data);
-}
-this.props.setDigit(digit);case 9:case'end':return _context.stop();}}},null,this);}},{key:'removeLastSymbol',value:function removeLastSymbol()
+digit.push(num);
+this.sendT9(digit);
+this.props.setDigit(digit);case 4:case'end':return _context.stop();}}},null,this);}},{key:'removeLastSymbol',value:function removeLastSymbol()
 
 
 {
 var digit=this.props.home.digit;
 if(digit.length>0){
 digit.pop();
+if(digit.length<1){
+this.props.setWord([]);
+}else{
+this.sendT9(digit);
+}
 this.props.setDigit(digit);
 }
-}},{key:'renderPinButtonsRow',value:function renderPinButtonsRow(
+}},{key:'sendT9',value:function sendT9(
+
+digit){var word;return regeneratorRuntime.async(function sendT9$(_context2){while(1){switch(_context2.prev=_context2.next){case 0:_context2.next=2;return regeneratorRuntime.awrap(
+(0,_home.sendDigit)(digit.join(''),this.props.settings.serverUrl));case 2:word=_context2.sent;
+word=JSON.parse(word);
+if(word&&word.data){
+this.props.setWord(word.data);
+}case 5:case'end':return _context2.stop();}}},null,this);}},{key:'renderPinButtonsRow',value:function renderPinButtonsRow(
+
 
 
 
@@ -133223,6 +133231,7 @@ _react2.default.createElement(_nativeBase.Right,null,
 _react2.default.createElement(_nachosUi.Button,{
 onPress:this.props.openDrawer,
 uppercase:false},
+
 _react2.default.createElement(_nativeBase.Icon,{active:true,name:'menu'})))),
 
 
@@ -138083,8 +138092,7 @@ setWord=setWord;exports.
 
 
 
-
-sendDigit=sendDigit;require(198           );var _reactNative=require(12            );var SET_DIGIT=exports.SET_DIGIT='SET_DIGIT';var SET_WORD=exports.SET_WORD='SET_WORD';function setDigit(digit){return{type:SET_DIGIT,payload:digit};}function setWord(word){console.log('setword',word);return{type:SET_WORD,payload:word};}function sendDigit(digit,serverUrl){return regeneratorRuntime.async(function sendDigit$(_context){while(1){switch(_context.prev=_context.next){case 0:return _context.abrupt('return', // 12 = react-native // 198 = whatwg-fetch
+sendDigit=sendDigit;require(198           );var _reactNative=require(12            );var SET_DIGIT=exports.SET_DIGIT='SET_DIGIT';var SET_WORD=exports.SET_WORD='SET_WORD';function setDigit(digit){return{type:SET_DIGIT,payload:digit};}function setWord(word){return{type:SET_WORD,payload:word};}function sendDigit(digit,serverUrl){return regeneratorRuntime.async(function sendDigit$(_context){while(1){switch(_context.prev=_context.next){case 0:return _context.abrupt('return', // 12 = react-native // 198 = whatwg-fetch
 fetch(serverUrl+'/t9/'+digit).
 then(function(response){
 return response._bodyText;
@@ -147554,7 +147562,6 @@ state,{
 digit:action.payload});
 
 }else if(action.type===_home.SET_WORD){
-console.log('word',action.payload);
 return babelHelpers.extends({},
 state,{
 word:action.payload});
