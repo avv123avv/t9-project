@@ -16,7 +16,6 @@ polyfill();
  */
 export function t9(req, res) {
     const number = parseInt(req.params.number);
-    console.log('number',number);
     if (number) {
         const matches = getWords.makeT9(number, wordlist);
         return res.json({
