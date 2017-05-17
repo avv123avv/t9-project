@@ -10,6 +10,4 @@ export const isClient       = typeof window !== 'undefined';
 
 export const baseURL        = `http://${HOST}:${PORT}`;
 
-export const remoteUrl1     = '';
-export const remoteUrl2     = '';
-export const localFile      = './src/server/static/files/local-file';
+export const words          = './src/server/static/files/english-words.json';
