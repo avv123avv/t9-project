@@ -12,6 +12,7 @@
     "color": "^0.11.3",
     "lodash": "^4.13.1",
     "moment": "^2.13.0",
+    "nachos-ui": "^0.1.2",
     "native-base": "2.0.12",
     "react": "15.4.2",
     "react-native": "0.41.2",

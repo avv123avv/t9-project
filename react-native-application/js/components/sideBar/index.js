@@ -1,7 +1,7 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Content, Text, List, ListItem } from 'native-base';
+import { Content, Text, List, ListItem, Left, Right, Icon } from 'native-base';
 
 import { setIndex } from '../../actions/list';
 import navigateTo from '../../actions/sideBarNav';
@@ -23,12 +23,22 @@ class SideBar extends Component {
   render() {
     return (
       <Content style={styles.sidebar} >
-          <ListItem button onPress={() => this.navigateTo('home')} >
-            <Text>Home</Text>
-          </ListItem>
-          <ListItem button onPress={() => this.navigateTo('blankPage')} >
-            <Text>Blank Page</Text>
-          </ListItem>
+        <ListItem button onPress={() => this.navigateTo('home')}>
+          <Right>
+            <Icon style={styles.icon} name="md-home" size={25} color="rgba(255,255,255,0.6)"/>
+          </Right>
+          <Left>
+            <Text style={styles.text}>Home</Text>
+          </Left>
+        </ListItem>
+        <ListItem button onPress={() => this.navigateTo('settings')}>
+          <Right>
+            <Icon style={styles.icon} name="md-settings" size={50} color="rgba(255,255,255,0.6)"/>
+          </Right>
+          <Left>
+            <Text style={styles.text}>Settings</Text>
+          </Left>
+        </ListItem>
       </Content>
     );
   }

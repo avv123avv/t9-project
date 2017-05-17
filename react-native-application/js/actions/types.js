@@ -9,8 +9,6 @@ export type Action =
     | { type: 'CLOSE_DRAWER'}
     | { type: 'SET_USER', name: string}
     | { type: 'SET_LIST', list: string}
-    /*********Send number to backed*********/
-    | { type: 'SEND_T9', name: string}
 
 export type Dispatch = (action:Action | Array<Action>) => any;
 export type GetState = () => Object;
