@@ -7,9 +7,8 @@ import { actions } from 'react-native-navigation-redux-helpers';
 
 import { closeDrawer } from './actions/drawer';
 
-import Login from './components/login/';
 import Home from './components/home/';
-import SplashPage from './components/splashscreen/';
+import Settings from './components/settings/';
 import SideBar from './components/sideBar';
 import { statusBarColor } from './themes/base-theme';
 
@@ -73,7 +72,9 @@ class AppNavigator extends Component {
   _renderScene(props) { // eslint-disable-line class-methods-use-this
     switch (props.scene.route.key) {
       case 'home':
-        return <SplashPage />;
+        return <Home />;
+      case 'settings':
+          return <Settings />;
       default :
         return <Home />;
     }
